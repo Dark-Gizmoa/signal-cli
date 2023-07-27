@@ -2,7 +2,7 @@
 FROM arm64v8/debian:stable-slim
 
 # Signal-cli Version (hier gegebenenfalls die neueste Version angeben)
-ENV SIGNAL_CLI_VERSION=0.11.11
+ENV SIGNAL_CLI_VERSION=0.11.11-Linux
 
 # Verzeichnis erstellen, um Schlüssel und Nachrichten zu speichern
 RUN mkdir /signal_data
