@@ -1,0 +1,28 @@
+name: Check Binary Release
+on:
+  schedule:
+    - cron: '0 0 * * *' # Tägliche Ausführung (alle 24 Stunden)
+
+jobs:
+  check-release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Fetch latest release
+      id: fetch_release
+      run: |
+        # Ersetze "username/repo" durch den Namen des fremden Repositories
+        latest_release=$(curl -s "https://api.github.com/repos/username/repo/releases/latest" | jq -r '.tag_name')
+        echo "::set-output name=release_tag::$latest_release"
+
+    - name: Run script on binary release
+      env:
+        BINARY_NAME: "name-of-binary"  # Ersetze "name-of-binary" durch den Namen deines Binaries
+      run: |
+        # Führe hier dein Skript aus, das auf das neue Binary reagieren soll
+        # Du kannst das Binary von dem fremden Repository herunterladen und entsprechende Aktionen ausführen.
+        # Du kannst die Release-Tag-Informationen über ${{ steps.fetch_release.outputs.release_tag }} abrufen.
+        echo "New release created for $BINARY_NAME with tag ${{ steps.fetch_release.outputs.release_tag }}"
