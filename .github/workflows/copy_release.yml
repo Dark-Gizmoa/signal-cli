@@ -15,7 +15,7 @@ jobs:
       id: fetch_release
       run: |
         # Ersetze "username/repo" durch den Namen des fremden Repositories
-        latest_release=$(curl -s "https://api.github.com/repos/username/repo/releases/latest" | jq -r '.tag_name')
+        latest_release=$(curl -s "https://api.github.com/repos/AsamK/signal-cli/releases/latest" | jq -r '.tag_name')
         echo "::set-output name=release_tag::$latest_release"
 
     - name: Run script on binary release
